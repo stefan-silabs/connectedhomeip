@@ -38,7 +38,7 @@ import logging
 import secrets
 
 from mobly import asserts
-from TC_GCAST_common import generate_membership_entry_matcher, get_feature_map, valid_endpoints_list
+from TC_GC_common import generate_membership_entry_matcher, get_feature_map, valid_endpoints_list
 
 import matter.clusters as Clusters
 from matter.interaction_model import InteractionModelError, Status
@@ -51,11 +51,11 @@ from matter.tlv import uint
 logger = logging.getLogger(__name__)
 
 
-class TC_GCAST_2_2(MatterBaseTest):
-    def desc_TC_GCAST_2_2(self):
+class TC_GC_2_2(MatterBaseTest):
+    def desc_TC_GC_2_2(self):
         return "[TC-GCAST-2.2] JoinGroup as Listener or Sender with DUT as Server - Provisional"
 
-    def steps_TC_GCAST_2_2(self):
+    def steps_TC_GC_2_2(self):
         return [TestStep("1a", "Commission DUT to TH (can be skipped if done in a preceding test)", is_commissioning=True),
                 TestStep("1b", "TH removes any existing group and KeySetID on the DUT"),
                 TestStep("1c", "Th subscribes to Membership attribute with min interval 0s and max interval 30s"),
@@ -91,11 +91,11 @@ class TC_GCAST_2_2(MatterBaseTest):
                 TestStep(20, "JoinGroup with invalid GroupID (result: constraint error)"),
                 TestStep(21, "JoinGroup with Key length != 16 (result: constraint error)")]
 
-    def pics_TC_GCAST_2_2(self) -> list[str]:
-        return ["GCAST.S"]
+    def pics_TC_GC_2_2(self) -> list[str]:
+        return ["GC.S"]
 
     @run_if_endpoint_matches(has_cluster(Clusters.Groupcast))
-    async def test_TC_GCAST_2_2(self):
+    async def test_TC_GC_2_2(self):
         groupcast_cluster = Clusters.Objects.Groupcast
         membership_attribute = Clusters.Groupcast.Attributes.Membership
 
