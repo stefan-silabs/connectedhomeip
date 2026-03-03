@@ -99,12 +99,12 @@ class TC_GC_2_2(MatterBaseTest):
         groupcast_cluster = Clusters.Objects.Groupcast
         membership_attribute = Clusters.Groupcast.Attributes.Membership
         endpoints_list_empty = []
-        
+
         # Commission DUT to TH (can be skipped if done in a preceding test)
         self.step("1a")
         ln_enabled, sd_enabled, pga_enabled = await get_feature_map(self)
         endpoints_list = await valid_endpoints_list(self, ln_enabled)
-        if endpoints_list[0] is None:
+        if ln_enabled and not endpoints_list:
             self.mark_all_remaining_steps_skipped("1b")
             return
 
